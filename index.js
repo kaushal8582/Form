@@ -112,10 +112,8 @@ states.addEventListener("change", async (e) => {
 
 // Function to save form data to localStorage without overwriting previous entries
 const saveDataToLocalStorage = () => {
-  // Get existing data from localStorage or initialize an empty array if none exists
   let existingData = JSON.parse(localStorage.getItem("formData")) || [];
 
-  // Get the current form data
   const formData = {
     name: document.querySelector("#name").value,
     mobile: document.querySelector("#mobile").value,
@@ -130,10 +128,8 @@ const saveDataToLocalStorage = () => {
     city: document.querySelector("#cities").value,
   };
 
-  // Add the new form data to the existing array
   existingData.push(formData);
 
-  // Save the updated array back to localStorage
   localStorage.setItem("formData", JSON.stringify(existingData));
 
   alert("Form data saved successfully!");
@@ -141,6 +137,39 @@ const saveDataToLocalStorage = () => {
 
 // Event listener for the submit button
 submitBtn.addEventListener("click", (e) => {
-  e.preventDefault(); // Prevent form from submitting
-  saveDataToLocalStorage(); // Save data to localStorage
+  e.preventDefault();
+  saveDataToLocalStorage();
+});
+
+// Capture and Auto-Fill Form with Current Location
+document.querySelector('#getLocationBtn').addEventListener('click', function() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        
+        // Call reverse geocoding API to get address
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+        .then(response => response.json())
+        .then(data => {
+          const address = data.address;
+          document.getElementById('area').value = address.suburb || '';
+          document.getElementById('village').value = address.village || '';
+          document.getElementById('panchayat').value = address.hamlet || '';
+          document.getElementById('block').value = address.county || '';
+          document.getElementById('district').value = address.state_district || address.city_district || '';
+          document.getElementById('location').value = `${address.city || address.town || ''}, ${address.state || ''}`;
+        })
+        .catch(error => {
+          console.log("Error fetching reverse geocoding data: ", error);
+        });
+      },
+      function(error) {
+        console.error("Error getting location:", error);
+      }
+    );
+  } else {
+    alert("Geolocation is not supported by your browser");
+  }
 });
