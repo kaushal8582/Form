@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Form Data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Stored Form Data</h1>
+  <table id="data-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Mobile</th>
+        <th>Area</th>
+        <th>Village</th>
+        <th>Panchayat</th>
+        <th>Block</th>
+        <th>District</th>
+        <th>Location</th>
+        <th>Country</th>
+        <th>State</th>
+        <th>City</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data rows will be inserted here dynamically -->
+    </tbody>
+  </table>
+
+  <script>
+    // Function to load data from localStorage and display it in the table
+    const loadStoredData = () => {
+      const data = JSON.parse(localStorage.getItem("formData")) || [];
+      const tableBody = document.querySelector("#data-table tbody");
+
+      if (data.length === 0) {
+        tableBody.innerHTML = "<tr><td colspan='11'>No data available</td></tr>";
+        return;
+      }
+
+      let rows = "";
+      data.forEach((item) => {
+        rows += `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.mobile}</td>
+            <td>${item.area}</td>
+            <td>${item.village}</td>
+            <td>${item.panchayat}</td>
+            <td>${item.block}</td>
+            <td>${item.district}</td>
+            <td>${item.location}</td>
+            <td>${item.country}</td>
+            <td>${item.state}</td>
+            <td>${item.city}</td>
+          </tr>
+        `;
+      });
+
+      tableBody.innerHTML = rows;
+    };
+
+    // Call the function to load data when the page loads
+    window.onload = loadStoredData;
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Routine Form</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <a  class="custom-btn" href="showData.html">Show Data</a>
+
+    <div class="form-container">
+        <h1>My Routine Form</h1>
+        <form action="#">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile No.</label>
+                <input type="text" id="mobile" placeholder="Enter your mobile number">
+            </div>
+            <div class="form-group">
+                <label for="area">Area</label>
+                <input type="text" id="area" placeholder="Enter your area">
+            </div>
+            <div class="form-group">
+                <label for="village">Village</label>
+                <input type="text" id="village" placeholder="Enter your village">
+            </div>
+            <div class="form-group">
+                <label for="panchayat">Panchayat</label>
+                <input type="text" id="panchayat" placeholder="Enter your panchayat">
+            </div>
+            <div class="form-group">
+                <label for="block">Block</label>
+                <input type="text" id="block" placeholder="Enter your block">
+            </div>
+            <div class="form-group">
+                <label for="district">District</label>
+                <input type="text" id="district" placeholder="Enter your district">
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="Enter your location">
+            </div>
+            
+            <div class="form-group location-selection">
+                <p>Automatically Capture or Select Your Location:</p>
+                <button type="button" class="btn-location">Use Current Location</button>
+            </div>
+            
+            <div class="form-group dropdowns">
+                <select name="state" id="countries">
+                    <option value="">Select countries</option>
+                </select>
+                <select name="district" id="states">
+                    <option value="">Select states</option>
+                </select>
+                <select name="village" id="cities">
+                    <option value="">Select cities</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="index.js"></script>
+</body>
+</html>
